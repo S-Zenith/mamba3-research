@@ -1,0 +1,37 @@
+block_name,case_name,operator,runtime_ms,total,percent,operator_category_zh,operator_name_zh,operator_explanation_zh,runtime_source
+mamba_ssm_mamba,quick_b1_l128_d256,aten::matmul,4.377,10.568000000000001,41.41748675246025,矩阵计算,矩阵乘法,通用矩阵乘法接口。在线性层、投影层、注意力或状态空间计算里，经常用它把输入向量乘以权重矩阵。耗时高通常说明大部分计算量来自 dense 矩阵运算。,cpu_fallback
+mamba_ssm_mamba,quick_b1_l128_d256,aten::mm,4.341,10.568000000000001,41.07683573050719,矩阵计算,二维矩阵乘法,专门处理二维矩阵相乘的底层算子，常由 Linear、matmul 或权重投影触发。它通常是神经网络里最主要的浮点计算来源。,cpu_fallback
+mamba_ssm_mamba,quick_b1_l128_d256,cudaLaunchKernel,0.304,10.568000000000001,2.876608629825889,CUDA 调度,启动 CUDA kernel,CPU 向 GPU 发起一个 kernel 启动请求。它不是模型数学计算本身，但 kernel 很多时，调度开销会在 CPU profiler 中变明显。,cpu_fallback
+mamba_ssm_mamba,quick_b1_l128_d256,aten::linear,0.237,10.568000000000001,2.2426192278576833,神经网络层,线性层,PyTorch 的全连接层接口，本质是输入乘以权重矩阵，再可选加 bias。Mamba/Mamba2/Mamba3 里很多输入投影、输出投影都来自这个算子。,cpu_fallback
+mamba_ssm_mamba,quick_b1_l128_d256,SelectiveScanFn,0.182,10.568000000000001,1.7221801665404994,Mamba 核心,选择性扫描,Mamba1 的核心状态空间扫描函数。它沿序列维度递推状态，是 Mamba 区别于普通 MLP/卷积的重要部分。,cpu_fallback
+mamba_ssm_mamba,quick_b1_l128_d256,CausalConv1dFn,0.146,10.568000000000001,1.3815291445874334,卷积,卷积相关算子,卷积或因果卷积相关操作。Mamba/Mamba2 中短卷积用于混合局部上下文信息。,cpu_fallback
+mamba_ssm_mamba,quick_b1_l128_d256,aten::contiguous,0.092,10.568000000000001,0.8705526116578349,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。,cpu_fallback
+mamba_ssm_mamba,quick_b1_l128_d256,aten::clone,0.088,10.568000000000001,0.8327024981074942,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。,cpu_fallback
+mamba_ssm_mamba,quick_b1_l128_d256,Other,0.8009999999999999,10.568000000000001,7.579485238455713,汇总项,其他算子,为了让图表可读，排名靠后的许多小算子被合并到 Other。它代表剩余算子的总和，不是单个真实 PyTorch 算子。,cpu_fallback
+mamba_ssm_mamba2,quick_b1_l128_d256,aten::linear,4.561,15.066999999999998,30.271454171367896,神经网络层,线性层,PyTorch 的全连接层接口，本质是输入乘以权重矩阵，再可选加 bias。Mamba/Mamba2/Mamba3 里很多输入投影、输出投影都来自这个算子。,cpu_fallback
+mamba_ssm_mamba2,quick_b1_l128_d256,aten::matmul,4.524,15.066999999999998,30.025884383088876,矩阵计算,矩阵乘法,通用矩阵乘法接口。在线性层、投影层、注意力或状态空间计算里，经常用它把输入向量乘以权重矩阵。耗时高通常说明大部分计算量来自 dense 矩阵运算。,cpu_fallback
+mamba_ssm_mamba2,quick_b1_l128_d256,aten::mm,4.462,15.066999999999998,29.614389062188888,矩阵计算,二维矩阵乘法,专门处理二维矩阵相乘的底层算子，常由 Linear、matmul 或权重投影触发。它通常是神经网络里最主要的浮点计算来源。,cpu_fallback
+mamba_ssm_mamba2,quick_b1_l128_d256,MambaChunkScanCombinedFn,0.766,15.066999999999998,5.083958319506206,Mamba2 核心,分块扫描融合函数,Mamba2 的核心分块扫描函数，把序列切成 chunk 来处理状态空间递推，目标是更适合 GPU 并行执行。,cpu_fallback
+mamba_ssm_mamba2,quick_b1_l128_d256,cudaLaunchKernel,0.142,15.066999999999998,0.9424570252870511,CUDA 调度,启动 CUDA kernel,CPU 向 GPU 发起一个 kernel 启动请求。它不是模型数学计算本身，但 kernel 很多时，调度开销会在 CPU profiler 中变明显。,cpu_fallback
+mamba_ssm_mamba2,quick_b1_l128_d256,LayerNormFn,0.134,15.066999999999998,0.8893608548483442,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。,cpu_fallback
+mamba_ssm_mamba2,quick_b1_l128_d256,CausalConv1dFn,0.109,15.066999999999998,0.7234353222273844,卷积,卷积相关算子,卷积或因果卷积相关操作。Mamba/Mamba2 中短卷积用于混合局部上下文信息。,cpu_fallback
+mamba_ssm_mamba2,quick_b1_l128_d256,aten::reshape,0.051,15.066999999999998,0.3384880865467578,形状变换,重塑形状,改变张量形状。多数情况下是视图操作，但如果内存不连续，也可能触发额外拷贝。,cpu_fallback
+mamba_ssm_mamba2,quick_b1_l128_d256,Other,0.318,15.066999999999998,2.110572774938608,汇总项,其他算子,为了让图表可读，排名靠后的许多小算子被合并到 Other。它代表剩余算子的总和，不是单个真实 PyTorch 算子。,cpu_fallback
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::linear,3.389,13.100999999999999,25.8682543317304,神经网络层,线性层,PyTorch 的全连接层接口，本质是输入乘以权重矩阵，再可选加 bias。Mamba/Mamba2/Mamba3 里很多输入投影、输出投影都来自这个算子。,cpu_fallback
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::matmul,3.349,13.100999999999999,25.56293412716587,矩阵计算,矩阵乘法,通用矩阵乘法接口。在线性层、投影层、注意力或状态空间计算里，经常用它把输入向量乘以权重矩阵。耗时高通常说明大部分计算量来自 dense 矩阵运算。,cpu_fallback
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::mm,3.281,13.100999999999999,25.043889779406154,矩阵计算,二维矩阵乘法,专门处理二维矩阵相乘的底层算子，常由 Linear、matmul 或权重投影触发。它通常是神经网络里最主要的浮点计算来源。,cpu_fallback
+mamba_ssm_mamba3,quick_b1_l128_d256,cudaLaunchKernel,0.783,13.100999999999999,5.976643004350814,CUDA 调度,启动 CUDA kernel,CPU 向 GPU 发起一个 kernel 启动请求。它不是模型数学计算本身，但 kernel 很多时，调度开销会在 CPU profiler 中变明显。,cpu_fallback
+mamba_ssm_mamba3,quick_b1_l128_d256,_Mamba3Function,0.581,13.100999999999999,4.434775971299901,Mamba3 核心,Mamba3 自定义 kernel,Mamba3 的 Triton/TileLang/CUTE 自定义算子，通常负责状态空间递推、旋转位置相关计算或 MIMO/SISO 扫描。,cpu_fallback
+mamba_ssm_mamba3,quick_b1_l128_d256,LayerNormFn,0.381,13.100999999999999,2.9081749484772157,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。,cpu_fallback
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::to,0.165,13.100999999999999,1.2594458438287155,数据转换,类型或设备转换,把张量转换 dtype、device 或 memory format。比如 float16/float32 之间转换，或为了 kernel 要求临时转换精度。,cpu_fallback
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::_to_copy,0.158,13.100999999999999,1.2060148080299216,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。,cpu_fallback
+mamba_ssm_mamba3,quick_b1_l128_d256,Other,1.014,13.100999999999999,7.739867185711015,汇总项,其他算子,为了让图表可读，排名靠后的许多小算子被合并到 Other。它代表剩余算子的总和，不是单个真实 PyTorch 算子。,cpu_fallback
+torch_baseline,quick_b1_l128_d256,aten::layer_norm,2.871,6.66,43.108108108108105,归一化,层归一化入口,LayerNorm 的高层接口，用来把每个 token 的特征归一化，让数值更稳定。它通常会继续调用 native_layer_norm。,cpu_fallback
+torch_baseline,quick_b1_l128_d256,aten::native_layer_norm,2.843,6.66,42.687687687687685,归一化,层归一化底层实现,LayerNorm 的底层实现，计算均值、方差并缩放输入。baseline 里它占比高，是因为 baseline block 很小，归一化开销相对明显。,cpu_fallback
+torch_baseline,quick_b1_l128_d256,aten::linear,0.31,6.66,4.654654654654655,神经网络层,线性层,PyTorch 的全连接层接口，本质是输入乘以权重矩阵，再可选加 bias。Mamba/Mamba2/Mamba3 里很多输入投影、输出投影都来自这个算子。,cpu_fallback
+torch_baseline,quick_b1_l128_d256,aten::addmm,0.228,6.66,3.423423423423423,矩阵计算,加偏置矩阵乘法,执行 bias + input @ weight 这类融合形式，常见于 nn.Linear。它同时包含矩阵乘法和加法，所以既会占用计算时间，也会申请输出张量显存。,cpu_fallback
+torch_baseline,quick_b1_l128_d256,cudaLaunchKernel,0.152,6.66,2.2822822822822824,CUDA 调度,启动 CUDA kernel,CPU 向 GPU 发起一个 kernel 启动请求。它不是模型数学计算本身，但 kernel 很多时，调度开销会在 CPU profiler 中变明显。,cpu_fallback
+torch_baseline,quick_b1_l128_d256,aten::empty,0.057,6.66,0.8558558558558558,显存分配,申请未初始化张量,只申请一块张量内存，不填充值。它本身不是数学计算，但在显存 breakdown 中出现较多，说明该模块创建了不少中间张量。,cpu_fallback
+torch_baseline,quick_b1_l128_d256,aten::silu,0.048,6.66,0.7207207207207207,激活函数,SiLU 激活,SiLU，也叫 Swish，形式大致是 x * sigmoid(x)。Mamba 系列里常用它作为门控或卷积后的非线性激活。,cpu_fallback
+torch_baseline,quick_b1_l128_d256,aten::view,0.036,6.66,0.5405405405405405,形状变换,视图变形,不复制数据，只用新的形状解释同一块内存。通常耗时和显存都很小。,cpu_fallback
+torch_baseline,quick_b1_l128_d256,Other,0.115,6.66,1.7267267267267266,汇总项,其他算子,为了让图表可读，排名靠后的许多小算子被合并到 Other。它代表剩余算子的总和，不是单个真实 PyTorch 算子。,cpu_fallback

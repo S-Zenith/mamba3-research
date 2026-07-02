@@ -1,0 +1,9 @@
+torch==2.3.1
+einops
+onnx
+pandas
+matplotlib
+pypdf
+rich
+pytest
+tabulate

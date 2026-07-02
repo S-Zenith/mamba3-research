@@ -1,0 +1,23 @@
+block_name,case_name,operator,memory_mb,total,percent,operator_category_zh,operator_name_zh,operator_explanation_zh
+mamba_ssm_mamba,quick_b1_l128_d256,aten::mm,0.8984375,1.7890625,50.21834061135371,矩阵计算,二维矩阵乘法,专门处理二维矩阵相乘的底层算子，常由 Linear、matmul 或权重投影触发。它通常是神经网络里最主要的浮点计算来源。
+mamba_ssm_mamba,quick_b1_l128_d256,aten::empty_strided,0.75,1.7890625,41.92139737991266,显存分配,按步幅申请张量,申请带有特定 stride 布局的张量。常由转置、reshape、contiguous 或某些 kernel 输出触发，主要反映中间结果的内存分配。
+mamba_ssm_mamba,quick_b1_l128_d256,aten::empty,0.078125,1.7890625,4.366812227074235,显存分配,申请未初始化张量,只申请一块张量内存，不填充值。它本身不是数学计算，但在显存 breakdown 中出现较多，说明该模块创建了不少中间张量。
+mamba_ssm_mamba,quick_b1_l128_d256,aten::exp,0.03125,1.7890625,1.7467248908296942,数学函数,指数函数,计算 e 的 x 次方。Mamba 里状态空间参数 A 有时会通过指数形式参数化，用来保证数值范围符合模型设计。
+mamba_ssm_mamba,quick_b1_l128_d256,aten::neg,0.03125,1.7890625,1.7467248908296942,数学函数,取负号,把张量变成相反数。Mamba 状态空间里常会构造负的 A 参数，使状态衰减而不是发散。
+mamba_ssm_mamba2,quick_b1_l128_d256,aten::empty,0.89111328125,2.14599609375,41.52445961319681,显存分配,申请未初始化张量,只申请一块张量内存，不填充值。它本身不是数学计算，但在显存 breakdown 中出现较多，说明该模块创建了不少中间张量。
+mamba_ssm_mamba2,quick_b1_l128_d256,aten::mm,0.69140625,2.14599609375,32.21843003412969,矩阵计算,二维矩阵乘法,专门处理二维矩阵相乘的底层算子，常由 Linear、matmul 或权重投影触发。它通常是神经网络里最主要的浮点计算来源。
+mamba_ssm_mamba2,quick_b1_l128_d256,aten::empty_strided,0.5625,2.14599609375,26.21160409556314,显存分配,按步幅申请张量,申请带有特定 stride 布局的张量。常由转置、reshape、contiguous 或某些 kernel 输出触发，主要反映中间结果的内存分配。
+mamba_ssm_mamba2,quick_b1_l128_d256,aten::exp,0.00048828125,2.14599609375,0.022753128555176336,数学函数,指数函数,计算 e 的 x 次方。Mamba 里状态空间参数 A 有时会通过指数形式参数化，用来保证数值范围符合模型设计。
+mamba_ssm_mamba2,quick_b1_l128_d256,aten::neg,0.00048828125,2.14599609375,0.022753128555176336,数学函数,取负号,把张量变成相反数。Mamba 状态空间里常会构造负的 A 参数，使状态衰减而不是发散。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::mm,0.70703125,2.18408203125,32.37200983679857,矩阵计算,二维矩阵乘法,专门处理二维矩阵相乘的底层算子，常由 Linear、matmul 或权重投影触发。它通常是神经网络里最主要的浮点计算来源。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::empty_strided,0.658203125,2.18408203125,30.136373798345627,显存分配,按步幅申请张量,申请带有特定 stride 布局的张量。常由转置、reshape、contiguous 或某些 kernel 输出触发，主要反映中间结果的内存分配。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::empty,0.65478515625,2.18408203125,29.979879275653925,显存分配,申请未初始化张量,只申请一块张量内存，不填充值。它本身不是数学计算，但在显存 breakdown 中出现较多，说明该模块创建了不少中间张量。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::to,0.140625,2.18408203125,6.438631790744467,数据转换,类型或设备转换,把张量转换 dtype、device 或 memory format。比如 float16/float32 之间转换，或为了 kernel 要求临时转换精度。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::softplus,0.0078125,2.18408203125,0.3577017661524704,激活/参数约束,Softplus,把数值平滑地变成正数，常用于保证时间步长 dt 等参数为正。Mamba3 里会用它处理 dt 或 A 相关参数。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::add,0.00390625,2.18408203125,0.1788508830762352,张量运算,逐元素加法,两个张量逐元素相加。常见于加 bias、残差连接、参数组合或中间结果累加。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::clamp,0.00390625,2.18408203125,0.1788508830762352,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::neg,0.00390625,2.18408203125,0.1788508830762352,数学函数,取负号,把张量变成相反数。Mamba 状态空间里常会构造负的 A 参数，使状态衰减而不是发散。
+mamba_ssm_mamba3,quick_b1_l128_d256,Other,0.00390625,2.18408203125,0.1788508830762352,汇总项,其他算子,为了让图表可读，排名靠后的许多小算子被合并到 Other。它代表剩余算子的总和，不是单个真实 PyTorch 算子。
+torch_baseline,quick_b1_l128_d256,aten::addmm,0.375,0.7509765625,49.93498049414825,矩阵计算,加偏置矩阵乘法,执行 bias + input @ weight 这类融合形式，常见于 nn.Linear。它同时包含矩阵乘法和加法，所以既会占用计算时间，也会申请输出张量显存。
+torch_baseline,quick_b1_l128_d256,aten::silu,0.25,0.7509765625,33.28998699609883,激活函数,SiLU 激活,SiLU，也叫 Swish，形式大致是 x * sigmoid(x)。Mamba 系列里常用它作为门控或卷积后的非线性激活。
+torch_baseline,quick_b1_l128_d256,aten::empty,0.1259765625,0.7509765625,16.775032509752926,显存分配,申请未初始化张量,只申请一块张量内存，不填充值。它本身不是数学计算，但在显存 breakdown 中出现较多，说明该模块创建了不少中间张量。

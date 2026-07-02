@@ -1,0 +1,26 @@
+# Mamba3 SISO Error Plots
+
+- `final_output_surface_reference_with_abs_error.png`
+- `final_output_abs_error_heatmap.png`
+- `final_output_relative_error_heatmap.png`
+- `final_output_value_vs_error_scatter.png`
+- `final_output_reference_sorted_actual_regression.png`
+- `final_output_reference_sorted_actual_regression_near_zero.png`
+- `q_rot_b0_h0_surface_reference_with_abs_error.png`
+- `q_rot_b0_h0_abs_error_heatmap.png`
+- `q_rot_b0_h0_relative_error_heatmap.png`
+- `q_rot_b0_h0_value_vs_error_scatter.png`
+- `q_rot_b0_h0_reference_sorted_actual_regression.png`
+- `q_rot_b0_h0_reference_sorted_actual_regression_near_zero.png`
+- `k_scaled_b0_h0_surface_reference_with_abs_error.png`
+- `k_scaled_b0_h0_abs_error_heatmap.png`
+- `k_scaled_b0_h0_relative_error_heatmap.png`
+- `k_scaled_b0_h0_value_vs_error_scatter.png`
+- `k_scaled_b0_h0_reference_sorted_actual_regression.png`
+- `k_scaled_b0_h0_reference_sorted_actual_regression_near_zero.png`
+- `out_v_b0_h0_surface_reference_with_abs_error.png`
+- `out_v_b0_h0_abs_error_heatmap.png`
+- `out_v_b0_h0_relative_error_heatmap.png`
+- `out_v_b0_h0_value_vs_error_scatter.png`
+- `out_v_b0_h0_reference_sorted_actual_regression.png`
+- `out_v_b0_h0_reference_sorted_actual_regression_near_zero.png`

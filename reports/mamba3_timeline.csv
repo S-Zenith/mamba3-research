@@ -1,0 +1,81 @@
+block_name,case_name,operator,start_us,end_us,duration_us,timeline_source,operator_category_zh,operator_name_zh,operator_explanation_zh
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::linear,0.0,3276.0,3293.0,cpu_profiler_event,神经网络层,线性层,PyTorch 的全连接层接口，本质是输入乘以权重矩阵，再可选加 bias。Mamba/Mamba2/Mamba3 里很多输入投影、输出投影都来自这个算子。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::t,3.0,4.0,18.0,cpu_profiler_event,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::transpose,7.0,1.0,11.0,cpu_profiler_event,形状变换,转置,交换两个维度。线性层或卷积前后经常需要转置以满足算子输入格式。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::as_strided,15.0,0.0,2.0,cpu_profiler_event,形状变换,底层视图步幅,PyTorch 用 stride 描述张量视图的底层操作。它通常由 view、transpose、slice 等高级操作间接触发。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::matmul,22.0,3273.0,3268.0,cpu_profiler_event,矩阵计算,矩阵乘法,通用矩阵乘法接口。在线性层、投影层、注意力或状态空间计算里，经常用它把输入向量乘以权重矩阵。耗时高通常说明大部分计算量来自 dense 矩阵运算。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::reshape,25.0,11.0,3.0,cpu_profiler_event,形状变换,重塑形状,改变张量形状。多数情况下是视图操作，但如果内存不连续，也可能触发额外拷贝。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::view,26.0,11.0,2.0,cpu_profiler_event,形状变换,视图变形,不复制数据，只用新的形状解释同一块内存。通常耗时和显存都很小。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::mm,29.0,3224.0,3212.0,cpu_profiler_event,矩阵计算,二维矩阵乘法,专门处理二维矩阵相乘的底层算子，常由 Linear、matmul 或权重投影触发。它通常是神经网络里最主要的浮点计算来源。
+mamba_ssm_mamba3,quick_b1_l128_d256,cudaOccupancyMaxActiveBlocksPerMultiprocessor,2636.0,2627.0,8.0,cpu_profiler_event,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。
+mamba_ssm_mamba3,quick_b1_l128_d256,cudaLaunchKernel,2647.0,3205.0,575.0,cpu_profiler_event,CUDA 调度,启动 CUDA kernel,CPU 向 GPU 发起一个 kernel 启动请求。它不是模型数学计算本身，但 kernel 很多时，调度开销会在 CPU profiler 中变明显。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::_unsafe_view,3276.0,3269.0,10.0,cpu_profiler_event,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::split_with_sizes,3377.0,3402.0,42.0,cpu_profiler_event,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::as_strided,3388.0,3375.0,4.0,cpu_profiler_event,形状变换,底层视图步幅,PyTorch 用 stride 描述张量视图的底层操作。它通常由 view、transpose、slice 等高级操作间接触发。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::as_strided,3397.0,3382.0,2.0,cpu_profiler_event,形状变换,底层视图步幅,PyTorch 用 stride 描述张量视图的底层操作。它通常由 view、transpose、slice 等高级操作间接触发。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::as_strided,3403.0,3387.0,1.0,cpu_profiler_event,形状变换,底层视图步幅,PyTorch 用 stride 描述张量视图的底层操作。它通常由 view、transpose、slice 等高级操作间接触发。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::reshape,3458.0,3460.0,19.0,cpu_profiler_event,形状变换,重塑形状,改变张量形状。多数情况下是视图操作，但如果内存不连续，也可能触发额外拷贝。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::_reshape_alias,3471.0,3460.0,6.0,cpu_profiler_event,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::reshape,3485.0,3470.0,2.0,cpu_profiler_event,形状变换,重塑形状,改变张量形状。多数情况下是视图操作，但如果内存不连续，也可能触发额外拷贝。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::reshape,3495.0,3482.0,4.0,cpu_profiler_event,形状变换,重塑形状,改变张量形状。多数情况下是视图操作，但如果内存不连续，也可能触发额外拷贝。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::_reshape_alias,3497.0,3481.0,1.0,cpu_profiler_event,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::reshape,3502.0,3487.0,2.0,cpu_profiler_event,形状变换,重塑形状,改变张量形状。多数情况下是视图操作，但如果内存不连续，也可能触发额外拷贝。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::_reshape_alias,3504.0,3488.0,1.0,cpu_profiler_event,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::permute,3513.0,3502.0,6.0,cpu_profiler_event,形状变换,维度重排,"只改变张量维度顺序的视图操作，例如从 B,L,D 调整到 B,D,L。通常本身不大分配显存，但可能导致后续 contiguous 分配。"
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::to,3528.0,3512.0,1.0,cpu_profiler_event,数据转换,类型或设备转换,把张量转换 dtype、device 或 memory format。比如 float16/float32 之间转换，或为了 kernel 要求临时转换精度。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::softplus,3542.0,3603.0,78.0,cpu_profiler_event,激活/参数约束,Softplus,把数值平滑地变成正数，常用于保证时间步长 dt 等参数为正。Mamba3 里会用它处理 dt 或 A 相关参数。
+mamba_ssm_mamba3,quick_b1_l128_d256,cudaLaunchKernel,3589.0,3600.0,28.0,cpu_profiler_event,CUDA 调度,启动 CUDA kernel,CPU 向 GPU 发起一个 kernel 启动请求。它不是模型数学计算本身，但 kernel 很多时，调度开销会在 CPU profiler 中变明显。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::neg,3629.0,3639.0,27.0,cpu_profiler_event,数学函数,取负号,把张量变成相反数。Mamba 状态空间里常会构造负的 A 参数，使状态衰减而不是发散。
+mamba_ssm_mamba3,quick_b1_l128_d256,cudaLaunchKernel,3643.0,3637.0,11.0,cpu_profiler_event,CUDA 调度,启动 CUDA kernel,CPU 向 GPU 发起一个 kernel 启动请求。它不是模型数学计算本身，但 kernel 很多时，调度开销会在 CPU profiler 中变明显。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::clamp,3679.0,3691.0,29.0,cpu_profiler_event,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。
+mamba_ssm_mamba3,quick_b1_l128_d256,cudaLaunchKernel,3696.0,3689.0,10.0,cpu_profiler_event,CUDA 调度,启动 CUDA kernel,CPU 向 GPU 发起一个 kernel 启动请求。它不是模型数学计算本身，但 kernel 很多时，调度开销会在 CPU profiler 中变明显。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::add,3727.0,3738.0,28.0,cpu_profiler_event,张量运算,逐元素加法,两个张量逐元素相加。常见于加 bias、残差连接、参数组合或中间结果累加。
+mamba_ssm_mamba3,quick_b1_l128_d256,cudaLaunchKernel,3743.0,3737.0,11.0,cpu_profiler_event,CUDA 调度,启动 CUDA kernel,CPU 向 GPU 发起一个 kernel 启动请求。它不是模型数学计算本身，但 kernel 很多时，调度开销会在 CPU profiler 中变明显。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::softplus,3758.0,3757.0,16.0,cpu_profiler_event,激活/参数约束,Softplus,把数值平滑地变成正数，常用于保证时间步长 dt 等参数为正。Mamba3 里会用它处理 dt 或 A 相关参数。
+mamba_ssm_mamba3,quick_b1_l128_d256,cudaLaunchKernel,3765.0,3756.0,8.0,cpu_profiler_event,CUDA 调度,启动 CUDA kernel,CPU 向 GPU 发起一个 kernel 启动请求。它不是模型数学计算本身，但 kernel 很多时，调度开销会在 CPU profiler 中变明显。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::mul,3782.0,3788.0,23.0,cpu_profiler_event,张量运算,逐元素乘法,两个张量逐元素相乘。门控结构里很常见，例如一个分支产生内容，另一个分支产生门控权重。
+mamba_ssm_mamba3,quick_b1_l128_d256,cudaLaunchKernel,3794.0,3786.0,9.0,cpu_profiler_event,CUDA 调度,启动 CUDA kernel,CPU 向 GPU 发起一个 kernel 启动请求。它不是模型数学计算本身，但 kernel 很多时，调度开销会在 CPU profiler 中变明显。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::permute,3816.0,3803.0,4.0,cpu_profiler_event,形状变换,维度重排,"只改变张量维度顺序的视图操作，例如从 B,L,D 调整到 B,D,L。通常本身不大分配显存，但可能导致后续 contiguous 分配。"
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::as_strided,3818.0,3802.0,1.0,cpu_profiler_event,形状变换,底层视图步幅,PyTorch 用 stride 描述张量视图的底层操作。它通常由 view、transpose、slice 等高级操作间接触发。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::permute,3824.0,3808.0,1.0,cpu_profiler_event,形状变换,维度重排,"只改变张量维度顺序的视图操作，例如从 B,L,D 调整到 B,D,L。通常本身不大分配显存，但可能导致后续 contiguous 分配。"
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::unsqueeze,3830.0,3819.0,6.0,cpu_profiler_event,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::expand,3846.0,3835.0,6.0,cpu_profiler_event,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。
+mamba_ssm_mamba3,quick_b1_l128_d256,LayerNormFn,3920.0,4173.0,270.0,cpu_profiler_event,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::reshape,3932.0,3921.0,6.0,cpu_profiler_event,形状变换,重塑形状,改变张量形状。多数情况下是视图操作，但如果内存不连续，也可能触发额外拷贝。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::_reshape_alias,3937.0,3921.0,1.0,cpu_profiler_event,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::empty_like,3952.0,3953.0,18.0,cpu_profiler_event,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::empty_strided,3958.0,3952.0,11.0,cpu_profiler_event,显存分配,按步幅申请张量,申请带有特定 stride 布局的张量。常由转置、reshape、contiguous 或某些 kernel 输出触发，主要反映中间结果的内存分配。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::empty,3984.0,3971.0,4.0,cpu_profiler_event,显存分配,申请未初始化张量,只申请一块张量内存，不填充值。它本身不是数学计算，但在显存 breakdown 中出现较多，说明该模块创建了不少中间张量。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::reshape,4165.0,4155.0,7.0,cpu_profiler_event,形状变换,重塑形状,改变张量形状。多数情况下是视图操作，但如果内存不连续，也可能触发额外拷贝。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::view,4167.0,4155.0,5.0,cpu_profiler_event,形状变换,视图变形,不复制数据，只用新的形状解释同一块内存。通常耗时和显存都很小。
+mamba_ssm_mamba3,quick_b1_l128_d256,LayerNormFn,4214.0,4308.0,111.0,cpu_profiler_event,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::reshape,4219.0,4206.0,4.0,cpu_profiler_event,形状变换,重塑形状,改变张量形状。多数情况下是视图操作，但如果内存不连续，也可能触发额外拷贝。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::_reshape_alias,4222.0,4206.0,1.0,cpu_profiler_event,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::empty_like,4228.0,4219.0,8.0,cpu_profiler_event,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::empty_strided,4230.0,4218.0,5.0,cpu_profiler_event,显存分配,按步幅申请张量,申请带有特定 stride 布局的张量。常由转置、reshape、contiguous 或某些 kernel 输出触发，主要反映中间结果的内存分配。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::empty,4241.0,4227.0,3.0,cpu_profiler_event,显存分配,申请未初始化张量,只申请一块张量内存，不填充值。它本身不是数学计算，但在显存 breakdown 中出现较多，说明该模块创建了不少中间张量。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::reshape,4316.0,4302.0,3.0,cpu_profiler_event,形状变换,重塑形状,改变张量形状。多数情况下是视图操作，但如果内存不连续，也可能触发额外拷贝。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::view,4317.0,4302.0,2.0,cpu_profiler_event,形状变换,视图变形,不复制数据，只用新的形状解释同一块内存。通常耗时和显存都很小。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::squeeze,4332.0,4322.0,7.0,cpu_profiler_event,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::squeeze,4340.0,4324.0,1.0,cpu_profiler_event,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::squeeze,4345.0,4329.0,1.0,cpu_profiler_event,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::squeeze,4348.0,4333.0,2.0,cpu_profiler_event,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::to,4359.0,4393.0,51.0,cpu_profiler_event,数据转换,类型或设备转换,把张量转换 dtype、device 或 memory format。比如 float16/float32 之间转换，或为了 kernel 要求临时转换精度。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::_to_copy,4362.0,4393.0,48.0,cpu_profiler_event,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::empty_strided,4367.0,4354.0,4.0,cpu_profiler_event,显存分配,按步幅申请张量,申请带有特定 stride 布局的张量。常由转置、reshape、contiguous 或某些 kernel 输出触发，主要反映中间结果的内存分配。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::copy_,4375.0,4392.0,34.0,cpu_profiler_event,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。
+mamba_ssm_mamba3,quick_b1_l128_d256,cudaLaunchKernel,4391.0,4390.0,16.0,cpu_profiler_event,CUDA 调度,启动 CUDA kernel,CPU 向 GPU 发起一个 kernel 启动请求。它不是模型数学计算本身，但 kernel 很多时，调度开销会在 CPU profiler 中变明显。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::to,4413.0,4414.0,18.0,cpu_profiler_event,数据转换,类型或设备转换,把张量转换 dtype、device 或 memory format。比如 float16/float32 之间转换，或为了 kernel 要求临时转换精度。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::_to_copy,4414.0,4415.0,18.0,cpu_profiler_event,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::empty_strided,4415.0,4401.0,3.0,cpu_profiler_event,显存分配,按步幅申请张量,申请带有特定 stride 布局的张量。常由转置、reshape、contiguous 或某些 kernel 输出触发，主要反映中间结果的内存分配。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::copy_,4419.0,4414.0,12.0,cpu_profiler_event,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。
+mamba_ssm_mamba3,quick_b1_l128_d256,cudaLaunchKernel,4422.0,4413.0,8.0,cpu_profiler_event,CUDA 调度,启动 CUDA kernel,CPU 向 GPU 发起一个 kernel 启动请求。它不是模型数学计算本身，但 kernel 很多时，调度开销会在 CPU profiler 中变明显。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::to,4434.0,4436.0,19.0,cpu_profiler_event,数据转换,类型或设备转换,把张量转换 dtype、device 或 memory format。比如 float16/float32 之间转换，或为了 kernel 要求临时转换精度。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::_to_copy,4435.0,4437.0,19.0,cpu_profiler_event,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::empty_strided,4436.0,4423.0,4.0,cpu_profiler_event,显存分配,按步幅申请张量,申请带有特定 stride 布局的张量。常由转置、reshape、contiguous 或某些 kernel 输出触发，主要反映中间结果的内存分配。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::copy_,4441.0,4436.0,12.0,cpu_profiler_event,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。
+mamba_ssm_mamba3,quick_b1_l128_d256,cudaLaunchKernel,4445.0,4435.0,7.0,cpu_profiler_event,CUDA 调度,启动 CUDA kernel,CPU 向 GPU 发起一个 kernel 启动请求。它不是模型数学计算本身，但 kernel 很多时，调度开销会在 CPU profiler 中变明显。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::to,4455.0,4454.0,16.0,cpu_profiler_event,数据转换,类型或设备转换,把张量转换 dtype、device 或 memory format。比如 float16/float32 之间转换，或为了 kernel 要求临时转换精度。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::_to_copy,4456.0,4454.0,15.0,cpu_profiler_event,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::empty_strided,4457.0,4443.0,3.0,cpu_profiler_event,显存分配,按步幅申请张量,申请带有特定 stride 布局的张量。常由转置、reshape、contiguous 或某些 kernel 输出触发，主要反映中间结果的内存分配。
+mamba_ssm_mamba3,quick_b1_l128_d256,aten::copy_,4461.0,4454.0,10.0,cpu_profiler_event,其他,未专门标注的算子,PyTorch profiler 记录到的其他底层操作。可以结合 operator 原名和 input_shapes 进一步定位其来源。

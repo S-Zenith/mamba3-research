@@ -1,0 +1,5 @@
+block_name,case_name,device,batch_size,seq_len,d_model,avg_time_ms,peak_memory_mb,status,note
+torch_baseline,quick_b1_l128_d256,cuda,1,128,256,0.10562560558319092,15.6181640625,ok,教学基线，不是论文 Mamba
+mamba_ssm_mamba,quick_b1_l128_d256,cuda,1,128,256,0.5172431945800782,15.8759765625,ok,官方 mamba-ssm Mamba block；使用非 fused fallback 路径
+mamba_ssm_mamba2,quick_b1_l128_d256,cuda,1,128,256,0.8684576034545899,15.88818359375,ok,官方 mamba-ssm Mamba2 block；使用非 fused fallback 路径
+mamba_ssm_mamba3,quick_b1_l128_d256,cuda,1,128,256,1.0709648132324219,15.896484375,ok,官方 mamba-ssm Mamba3 block

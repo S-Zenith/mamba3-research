@@ -1,0 +1,17 @@
+digraph Mamba3 {
+  rankdir=LR;
+  node [shape=box, style=rounded];
+  node_Mamba3 [label="Mamba3"];
+  node_in_proj [label="in_proj
+Linear"];
+  node_Mamba3 -> node_in_proj;
+  node_B_norm [label="B_norm
+RMSNorm"];
+  node_Mamba3 -> node_B_norm;
+  node_C_norm [label="C_norm
+RMSNorm"];
+  node_Mamba3 -> node_C_norm;
+  node_out_proj [label="out_proj
+Linear"];
+  node_Mamba3 -> node_out_proj;
+}

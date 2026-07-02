@@ -1,0 +1,28 @@
+.venv/
+venv/
+env/
+
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+.DS_Store
+.idea/
+.vscode/
+
+*.egg-info/
+build/
+dist/
+
+# Large generated model/export artifacts. Keep source code, docs, small reports, and plots tracked.
+*.pt
+*.pth
+*.onnx
+
+# Local logs and temporary files.
+*.log
+*.tmp
+*.temp
