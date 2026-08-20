@@ -28,4 +28,4 @@ dist/
 *.temp
 
 # Generated dataset caches (HuggingFace datasets).
-data/hf/
+**/data/hf/
