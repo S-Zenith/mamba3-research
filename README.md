@@ -12,7 +12,7 @@ This repository contains small, runnable Mamba/Mamba2/Mamba3 research demos and 
 - `reports/` and `summary/`: generated profiling summaries and Chinese project notes.
 - `mamba.pdf`, `mamba2.pdf`, `mamba3.pdf`: local reference papers used while building the demos.
 
-Large generated model checkpoints and ONNX exports are intentionally ignored by Git. Re-run the relevant scripts to regenerate them.
+Large generated model checkpoints and ONNX exports are intentionally ignored by Git. Trained checkpoints and intermediate tensors are hosted on Hugging Face: [S-Zenith/mamba3-research](https://huggingface.co/S-Zenith/mamba3-research). Re-run the relevant scripts to regenerate other artifacts.
 
 ## Environment
 
