@@ -1,0 +1,36 @@
+config:
+  desc: ''
+  sort: 1
+  value:
+    activation: silu
+    chunk_size: 64
+    d_model: 512
+    d_state: 2
+    dropout: 0.05
+    exp_mode: exp
+    expand: 1
+    headdim: 64
+    n_layer: 4
+    rope_mode: trig
+    seq_len: 128
+    vocab_size: 50257
+device:
+  desc: ''
+  sort: 4
+  value: cuda
+mode:
+  desc: ''
+  sort: 2
+  value: fp32
+preset:
+  desc: ''
+  sort: 0
+  value: baseline
+steps:
+  desc: ''
+  sort: 5
+  value: 1500
+tokenizer:
+  desc: ''
+  sort: 3
+  value: gpt2

@@ -1,0 +1,77 @@
+Diagnostic log bound to file: /home/myclaw/Projects/AI/mamba/swanlog/run-20260708_211920-9kyemyiw/debug/debug.log
+2026-07-08 21:19:39.535 | ERROR    | swanlab.sdk.internal.pkg.safe:block:101 - record chunk upload failed, record_type='column': Traceback (most recent call last):
+  File "/home/myclaw/Projects/AI/mamba/.venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "/home/myclaw/Projects/AI/mamba/.venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1106, in _validate_conn
+    conn.connect()
+  File "/home/myclaw/Projects/AI/mamba/.venv/lib/python3.10/site-packages/urllib3/connection.py", line 796, in connect
+    sock_and_verified = _ssl_wrap_socket_and_match_hostname(
+  File "/home/myclaw/Projects/AI/mamba/.venv/lib/python3.10/site-packages/urllib3/connection.py", line 975, in _ssl_wrap_socket_and_match_hostname
+    ssl_sock = ssl_wrap_socket(
+  File "/home/myclaw/Projects/AI/mamba/.venv/lib/python3.10/site-packages/urllib3/util/ssl_.py", line 433, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+  File "/home/myclaw/Projects/AI/mamba/.venv/lib/python3.10/site-packages/urllib3/util/ssl_.py", line 477, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+  File "/usr/lib/python3.10/ssl.py", line 513, in wrap_socket
+    return self.sslsocket_class._create(
+  File "/usr/lib/python3.10/ssl.py", line 1100, in _create
+    self.do_handshake()
+  File "/usr/lib/python3.10/ssl.py", line 1371, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLEOFError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/myclaw/Projects/AI/mamba/.venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+  File "/home/myclaw/Projects/AI/mamba/.venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+urllib3.exceptions.SSLError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/myclaw/Projects/AI/mamba/.venv/lib/python3.10/site-packages/requests/adapters.py", line 696, in send
+    resp = conn.urlopen(
+  File "/home/myclaw/Projects/AI/mamba/.venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+  File "/home/myclaw/Projects/AI/mamba/.venv/lib/python3.10/site-packages/swanlab/sdk/internal/pkg/client/session.py", line 36, in increment
+    new_retry = super().increment(*args, **kwargs)
+  File "/home/myclaw/Projects/AI/mamba/.venv/lib/python3.10/site-packages/urllib3/util/retry.py", line 543, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.swanlab.cn', port=443): Max retries exceeded with url: /api/experiment/7z0szt2ho1fa98dbf9tyx/columns (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/myclaw/Projects/AI/mamba/.venv/lib/python3.10/site-packages/swanlab/sdk/internal/pkg/safe/__init__.py", line 98, in block
+    yield
+  File "/home/myclaw/Projects/AI/mamba/.venv/lib/python3.10/site-packages/swanlab/sdk/internal/core_python/transport/dispatch.py", line 73, in _upload_chunk
+    self._sender.upload(record_type, chunk)
+  File "/home/myclaw/Projects/AI/mamba/.venv/lib/python3.10/site-packages/swanlab/sdk/internal/core_python/transport/sender.py", line 138, in upload
+    handler(records)
+  File "/home/myclaw/Projects/AI/mamba/.venv/lib/python3.10/site-packages/swanlab/sdk/internal/core_python/transport/sender.py", line 159, in upload_column
+    upload_columns(self._experiment_id, columns=columns[i : i + batch_size])
+  File "/home/myclaw/Projects/AI/mamba/.venv/lib/python3.10/site-packages/swanlab/sdk/internal/core_python/api/upload.py", line 85, in upload_columns
+    client.post(f"/experiment/{experiment_id}/columns", columns, retries=0)
+  File "/home/myclaw/Projects/AI/mamba/.venv/lib/python3.10/site-packages/swanlab/sdk/internal/core_python/client/__init__.py", line 59, in post
+    return _get_client().post(url, data=data, retries=retries)
+  File "/home/myclaw/Projects/AI/mamba/.venv/lib/python3.10/site-packages/swanlab/sdk/internal/pkg/client/__init__.py", line 103, in post
+    return self.request("POST", url, json=data, retries=retries)
+  File "/home/myclaw/Projects/AI/mamba/.venv/lib/python3.10/site-packages/swanlab/sdk/internal/pkg/client/__init__.py", line 96, in request
+    resp = self._session.request(method, full_url, **kwargs)
+  File "/home/myclaw/Projects/AI/mamba/.venv/lib/python3.10/site-packages/swanlab/sdk/internal/pkg/client/session.py", line 92, in request
+    return super().request(method, url, *args, **kwargs)
+  File "/home/myclaw/Projects/AI/mamba/.venv/lib/python3.10/site-packages/requests/sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/myclaw/Projects/AI/mamba/.venv/lib/python3.10/site-packages/swanlab/sdk/internal/pkg/client/session.py", line 111, in send
+    response = super().send(request, **kwargs)
+  File "/home/myclaw/Projects/AI/mamba/.venv/lib/python3.10/site-packages/requests/sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/myclaw/Projects/AI/mamba/.venv/lib/python3.10/site-packages/swanlab/sdk/internal/pkg/client/session.py", line 74, in send
+    return super(TimeoutHTTPAdapter, adapter).send(request, **kwargs)
+  File "/home/myclaw/Projects/AI/mamba/.venv/lib/python3.10/site-packages/requests/adapters.py", line 727, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: HTTPSConnectionPool(host='api.swanlab.cn', port=443): Max retries exceeded with url: /api/experiment/7z0szt2ho1fa98dbf9tyx/columns (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)')))
+2026-07-08 21:19:39.596 | WARNING  | swanlab.sdk.internal.core_python.transport.thread:warn:176 - Upload failed due to network or server issues, retrying automatically.

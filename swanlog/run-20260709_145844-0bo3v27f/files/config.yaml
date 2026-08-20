@@ -1,0 +1,38 @@
+config:
+  desc: ''
+  sort: 1
+  value:
+    angle_mode: tanh
+    chunk_size: 64
+    d_model: 256
+    d_state: 4
+    dropout: 0.05
+    exp_mode: exp
+    expand: 1
+    gate_activation: relu
+    headdim: 64
+    n_layer: 4
+    rope_mode: trig
+    scan_activation: softplus
+    seq_len: 128
+    vocab_size: 50257
+device:
+  desc: ''
+  sort: 4
+  value: cuda
+mode:
+  desc: ''
+  sort: 2
+  value: ptq_eval
+preset:
+  desc: ''
+  sort: 0
+  value: bigstate-long
+steps:
+  desc: ''
+  sort: 5
+  value: 5000
+tokenizer:
+  desc: ''
+  sort: 3
+  value: gpt2

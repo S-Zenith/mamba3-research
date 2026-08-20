@@ -26,3 +26,6 @@ dist/
 *.log
 *.tmp
 *.temp
+
+# Generated dataset caches (HuggingFace datasets).
+data/hf/

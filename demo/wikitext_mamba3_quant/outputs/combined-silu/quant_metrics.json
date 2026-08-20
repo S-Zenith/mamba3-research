@@ -1,0 +1,29 @@
+{
+  "W8A8": {
+    "val_loss": 17.02782106399536,
+    "val_ppl": 24836404.644532688,
+    "test_loss": 16.062351036071778,
+    "test_ppl": 9457806.433472868,
+    "val_ppl_ratio": 5775.13614533357,
+    "test_ppl_ratio": 2316.258648321463,
+    "passes_ppl_10pct": false
+  },
+  "W8A8_inproj16": {
+    "val_loss": 16.729156303405762,
+    "val_ppl": 18423844.924427915,
+    "test_loss": 16.815196990966797,
+    "test_ppl": 20079239.74902654,
+    "val_ppl_ratio": 4284.042488513179,
+    "test_ppl_ratio": 4917.494669355905,
+    "passes_ppl_10pct": false
+  },
+  "W4A16": {
+    "val_loss": 9.398899555206299,
+    "val_ppl": 12075.085451280074,
+    "test_loss": 9.336177825927734,
+    "test_ppl": 11340.978101824914,
+    "val_ppl_ratio": 2.807784115525357,
+    "test_ppl_ratio": 2.777455723327862,
+    "passes_ppl_10pct": false
+  }
+}

@@ -1,0 +1,28 @@
+config:
+  desc: ''
+  sort: 0
+  value:
+    chunk_size: 64
+    d_model: 512
+    d_state: 2
+    dropout: 0.05
+    expand: 1
+    headdim: 64
+    n_layer: 4
+    seq_len: 128
+    vocab_size: 50257
+device:
+  desc: ''
+  sort: 2
+  value: cuda
+quant_modes:
+  desc: ''
+  sort: 3
+  value:
+  - W8A8
+  - W4A8
+  - W4A16
+tokenizer:
+  desc: ''
+  sort: 1
+  value: gpt2

@@ -1,0 +1,5 @@
+2026-07-07 19:22:19.703 | WARNING  | swanlab.sdk.internal.pkg.client.session:increment:47 - [HTTP] retry #1 UNKNOWN  because status=500
+2026-07-07 19:22:19.986 | WARNING  | swanlab.sdk.internal.pkg.client.session:increment:47 - [HTTP] retry #2 UNKNOWN  because status=500
+2026-07-07 19:22:21.107 | WARNING  | swanlab.sdk.internal.pkg.client.session:increment:47 - [HTTP] retry #3 UNKNOWN  because status=500
+2026-07-07 19:22:23.200 | WARNING  | swanlab.sdk.internal.pkg.client.session:increment:47 - [HTTP] retry #4 UNKNOWN  because status=500
+Diagnostic log bound to file: /home/myclaw/Projects/AI/mamba/swanlog/run-20260707_192219-hn2ehu50/debug/debug.log
